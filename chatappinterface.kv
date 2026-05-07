@@ -1,17 +1,166 @@
 <Chat>:
-    orientation : 'vertical'
-    TextInput:
-        id: ChatBox
+    orientation: 'vertical'
+    spacing: 10
+    padding: 10
+    
+    # Header / Title Bar
     BoxLayout:
-        height : 90
+        size_hint: (1, 0.08)
         orientation: 'horizontal'
-        padding: 0
-        sixze_hint: (1,None)
-
+        spacing: 5
+        
+        Label:
+            text: '💬 Local Chat'
+            font_size: '18sp'
+            bold: True
+            color: (0.2, 0.6, 0.8, 1)
+            size_hint: (0.7, 1)
+            
+        Label:
+            text: 'Connected'
+            font_size: '12sp'
+            color: (0.3, 0.8, 0.3, 1)
+            size_hint: (0.3, 1)
+            halign: 'right'
+            valign: 'middle'
+            text_size: self.size
+    
+    # Chat Display Area
+    ScrollView:
+        size_hint: (1, 0.7)
+        do_scroll_x: False
+        do_scroll_y: True
+        
+        TextInput:
+            id: ChatBox
+            readonly: True
+            multiline: True
+            background_color: (0.95, 0.95, 0.95, 1)
+            foreground_color: (0.1, 0.1, 0.1, 1)
+            font_size: '13sp'
+            padding: [10, 10, 10, 10]
+            cursor_blink: False
+            
+    # Message Input Area
+    BoxLayout:
+        size_hint: (1, 0.12)
+        orientation: 'horizontal'
+        spacing: 10
+        padding: [5, 5, 5, 5]
+        
         TextInput:
             id: EntryBox
+            multiline: False
+            font_size: '14sp'
+            padding: [10, 12, 10, 12]
+            background_color: (1, 1, 1, 1)
+            foreground_color: (0.1, 0.1, 0.1, 1)
+            hint_text: 'Type your message here...'
+            hint_text_color: (0.6, 0.6, 0.6, 1)
+            size_hint: (0.75, 1)
+            
         Button:
             id: SendButton
-            text: 'Send'
-            size_hint: (0.3,1)
+            text: '📤 SEND'
+            font_size: '14sp'
+            bold: True
+            size_hint: (0.25, 1)
+            background_normal: ''
+            background_color: (0.2, 0.6, 0.8, 1)
+            color: (1, 1, 1, 1)
             on_press: root.clickAction()
+            on_release: 
+                root.ids.EntryBox.text = ''  # Clear input after sending
+    
+    # Status Bar
+    BoxLayout:
+        size_hint: (1, 0.05)
+        orientation: 'horizontal'
+        spacing: 5
+        padding: [5, 0, 5, 0]
+        
+        Label:
+            text: '● Online'
+            font_size: '10sp'
+            color: (0.3, 0.8, 0.3, 1)
+            size_hint: (0.5, 1)
+            halign: 'left'
+            valign: 'middle'
+            text_size: self.size
+            
+        Label:
+            text: 'Local Encrypted Chat'
+            font_size: '10sp'
+            color: (0.5, 0.5, 0.5, 1)
+            size_hint: (0.5, 1)
+            halign: 'right'
+            valign: 'middle'
+            text_size: self.size
+
+# Optional: Dark Theme Version (uncomment to use)
+# <Chat>:
+#     orientation: 'vertical'
+#     spacing: 10
+#     padding: 10
+#     
+#     BoxLayout:
+#         size_hint: (1, 0.08)
+#         canvas.before:
+#             Color:
+#                 rgba: (0.1, 0.1, 0.15, 1)
+#             Rectangle:
+#                 size: self.size
+#                 pos: self.pos
+#         
+#         Label:
+#             text: '💬 Local Chat'
+#             font_size: '18sp'
+#             bold: True
+#             color: (0.4, 0.8, 1, 1)
+#             size_hint: (0.7, 1)
+#             
+#         Label:
+#             text: 'Connected'
+#             font_size: '12sp'
+#             color: (0.3, 0.9, 0.3, 1)
+#             size_hint: (0.3, 1)
+#             halign: 'right'
+#     
+#     ScrollView:
+#         size_hint: (1, 0.7)
+#         do_scroll_x: False
+#         
+#         TextInput:
+#             id: ChatBox
+#             readonly: True
+#             background_color: (0.05, 0.05, 0.08, 1)
+#             foreground_color: (0.9, 0.9, 0.9, 1)
+#             font_size: '13sp'
+#             padding: [10, 10, 10, 10]
+#     
+#     BoxLayout:
+#         size_hint: (1, 0.12)
+#         spacing: 10
+#         padding: [5, 5, 5, 5]
+#         
+#         TextInput:
+#             id: EntryBox
+#             multiline: False
+#             font_size: '14sp'
+#             padding: [10, 12, 10, 12]
+#             background_color: (0.15, 0.15, 0.2, 1)
+#             foreground_color: (0.9, 0.9, 0.9, 1)
+#             hint_text: 'Type your message here...'
+#             hint_text_color: (0.5, 0.5, 0.5, 1)
+#             size_hint: (0.75, 1)
+#             
+#         Button:
+#             id: SendButton
+#             text: '📤 SEND'
+#             font_size: '14sp'
+#             bold: True
+#             size_hint: (0.25, 1)
+#             background_normal: ''
+#             background_color: (0.3, 0.5, 0.8, 1)
+#             color: (1, 1, 1, 1)
+#             on_press: root.clickAction()
